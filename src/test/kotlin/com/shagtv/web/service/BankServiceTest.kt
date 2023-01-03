@@ -1,7 +1,6 @@
 package com.shagtv.web.service
 
 import com.shagtv.web.datasource.BankDataSource
-import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
