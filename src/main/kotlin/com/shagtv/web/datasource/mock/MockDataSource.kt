@@ -1,10 +1,11 @@
-package com.shagtv.web.datasource
+package com.shagtv.web.datasource.mock
 
+import com.shagtv.web.datasource.BankDataSource
 import com.shagtv.web.model.Bank
 import org.springframework.stereotype.Repository
 import java.lang.IllegalArgumentException
 
-@Repository
+@Repository("mock")
 class MockDataSource : BankDataSource {
 
     val banks = mutableListOf(
