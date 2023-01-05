@@ -15,40 +15,57 @@
     <div id="container"></div>
 
     <script type="text/babel">
-        function Comment (props) {
-            function edit() {
-                alert("edit");
+
+        class Comment extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    editing: false
+                };
             }
 
-            function remove() {
-                alert("Remove");
+            edit = () => {
+                this.setState({
+                    editing: true
+                });
             }
 
-            return (
-                <div className="commentContainer">
-                    <div className="comment">{props.children}</div>
-                    <button onClick={edit} className="button-primary">Edit</button>
-                    <button onClick={remove} className="button-danger">Remove</button>
-                </div>
-            );
-        }
+            save = () => {
+                this.setState({
+                    editing: false
+                });
+            }
 
-        function Movie (props) {
-            return (
-                <div>
-                    <h1>{props.title}</h1>
-                    <h2>{props.genre}</h2>
-                </div>
-            );
-        }
+            remove = () => {
+                console.log('Removing a comment');
+            }
 
-        function Bacon() {
-            return (
-                <div>
-                    <h1>Bacon component</h1>
-                    <p>I am sample text</p>
-                </div>
-            );
+            renderNormal() {
+                return (
+                    <div className="commentContainer">
+                        <div className="comment">{this.props.children}</div>
+                        <button onClick={this.edit} className="button-primary">Edit</button>
+                        <button onClick={this.remove} className="button-danger">Remove</button>
+                    </div>
+                );
+            }
+
+            renderForm() {
+                return (
+                    <div className="commentContainer">
+                        <textarea defaultValue="{this.props.children}"></textarea>
+                        <button onClick={this.save} className="button-success">Save</button>
+                    </div>
+                );
+            }
+
+            render() {
+               if (this.state.editing) {
+                   return this.renderForm();
+               } else {
+                   return this.renderNormal();
+               }
+            }
         }
 
         const container = document.getElementById('container');
