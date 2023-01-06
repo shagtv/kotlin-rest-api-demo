@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "outDir": "./src/main/resources/static/js/"
+  },
+  "include": [
+    "./src/main/resources/static/tsx/*.tsx"
+  ]
+}

@@ -1,125 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Getting Started with Typescript and ReactJS</title>
     <link rel="stylesheet" type="text/css" href="./css/main.css">
-    <script src="./js/react.development.js"></script>
-    <script src="./js/react-dom.development.js"></script>
-    <script src="./js/babel.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- this is where react renders into -->
     <div id="container"></div>
-
-    <script type="text/babel">
-
-        class Comment extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = {
-                    editing: this.props.children.length === 0
-                };
-            }
-
-            edit = () => {
-                this.setState({
-                    editing: true
-                });
-            }
-
-            save = () => {
-                this.props.updateCommentText(this.refs.newText.value, this.props.index);
-                this.setState({
-                    editing: false
-                });
-            }
-
-            remove = () => {
-                this.props.deleteFromBoard(this.props.index);
-            }
-
-            renderNormal() {
-                return (
-                    <div className="commentContainer">
-                        <div ref="comment" className="comment">{this.props.children}</div>
-                        <button onClick={this.edit} className="button-primary">Edit</button>
-                        <button onClick={this.remove} className="button-danger">Remove</button>
-                    </div>
-                );
-            }
-
-            renderForm() {
-                return (
-                    <div className="commentContainer">
-                        <textarea ref="newText" defaultValue={this.props.children}></textarea>
-                        <button onClick={this.save} className="button-success">Save</button>
-                    </div>
-                );
-            }
-
-            render() {
-               if (this.state.editing) {
-                   return this.renderForm();
-               } else {
-                   return this.renderNormal();
-               }
-            }
-        }
-
-        class Board extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = {
-                    comments: []
-                };
-            }
-
-            removeComment = (i) => {
-                let arr = this.state.comments;
-                arr.splice(i, 1);
-                this.setState({comments: arr});
-            }
-
-            updateComment = (newText, i) => {
-                let arr = this.state.comments;
-                arr[i] = newText;
-                this.setState({comments: arr});
-            }
-
-            add = (text) => {
-                let arr = this.state.comments;
-                arr.push(text);
-                this.setState({comments: arr});
-            }
-
-            eachComment = (text, i) => {
-                return (
-                    <Comment key={i} index={i} updateCommentText={this.updateComment} deleteFromBoard={this.removeComment}>
-                        {text}
-                    </Comment>
-                );
-            }
-
-            render() {
-                return (
-                    <div>
-                        <button onClick={this.add.bind(null, "Default text")} className="button-info">Add New</button>
-                        <div className="board">
-                            {this.state.comments.map(this.eachComment)}
-                        </div>
-                    </div>
-                );
-            }
-        }
-
-        const container = document.getElementById('container');
-        const root = ReactDOM.createRoot(container);
-        root.render(
-            <Board />
-        );
-    </script>
-</body>
+    <script src="js/app-bundle.js"></script>
+  </body>
 </html>
