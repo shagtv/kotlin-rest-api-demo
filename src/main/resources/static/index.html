@@ -31,19 +31,20 @@
             }
 
             save = () => {
+                this.props.updateCommentText(this.refs.newText.value, this.props.index);
                 this.setState({
                     editing: false
                 });
             }
 
             remove = () => {
-                console.log('Removing a comment');
+                this.props.deleteFromBoard(this.props.index);
             }
 
             renderNormal() {
                 return (
                     <div className="commentContainer">
-                        <div className="comment">{this.props.children}</div>
+                        <div ref="comment" className="comment">{this.props.children}</div>
                         <button onClick={this.edit} className="button-primary">Edit</button>
                         <button onClick={this.remove} className="button-danger">Remove</button>
                     </div>
@@ -53,7 +54,7 @@
             renderForm() {
                 return (
                     <div className="commentContainer">
-                        <textarea defaultValue="{this.props.children}"></textarea>
+                        <textarea ref="newText" defaultValue={this.props.children}></textarea>
                         <button onClick={this.save} className="button-success">Save</button>
                     </div>
                 );
@@ -68,14 +69,51 @@
             }
         }
 
+        class Board extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    comments: [
+                        'I like bacon',
+                        'Want to get ice cream?',
+                        'Ok, we have enough comments now'
+                    ]
+                };
+            }
+
+            removeComment = (i) => {
+                let arr = this.state.comments;
+                arr.splice(i, 1);
+                this.setState({comments: arr});
+            }
+
+            updateComment = (newText, i) => {
+                let arr = this.state.comments;
+                arr[i] = newText;
+                this.setState({comments: arr});
+            }
+
+            eachComment = (text, i) => {
+                return (
+                    <Comment key={i} index={i} updateCommentText={this.updateComment} deleteFromBoard={this.removeComment}>
+                        {text}
+                    </Comment>
+                );
+            }
+
+            render() {
+                return (
+                    <div className="board">
+                        {this.state.comments.map(this.eachComment)}
+                    </div>
+                );
+            }
+        }
+
         const container = document.getElementById('container');
         const root = ReactDOM.createRoot(container);
         root.render(
-            <div className="board">
-                <Comment>Hey now</Comment>
-                <Comment>Another comment</Comment>
-                <Comment>quesrty</Comment>
-            </div>
+            <Board />
         );
     </script>
 </body>
