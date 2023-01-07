@@ -9,7 +9,7 @@ module.exports = {
         filename: "./app-bundle.js"
     },
     resolve: {
-        extensions: ['.Webpack.js', '.web.js', '.ts', '.js', '.jsx', '.tsx']
+        extensions: ['.Webpack.js', '.web.js', '.ts', '.js', '.jsx', '.tsx', '.css']
     },
     module: {
         rules: [
@@ -19,7 +19,15 @@ module.exports = {
                 use: {
                     loader: 'ts-loader'
                 }
-            }
+            },
+            {
+                test: /\.css$/,
+                exclude: /(node_modules|bower_components)/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
         ]
     }
 }
