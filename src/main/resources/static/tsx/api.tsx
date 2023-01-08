@@ -1,12 +1,12 @@
 import {Todo} from "./model";
 
-export const url = "http://localhost:9000/api/todo";
+export const url = "/api/todo";
 
 export const deleteTodo = (id: number) => {
     const requestOptions = {
         method: 'DELETE',
     };
-    fetch('http://localhost:9000/api/todo/' + id, requestOptions)
+    fetch(url + '/' + id, requestOptions)
         .then(response => response.json());
 }
 
@@ -16,7 +16,7 @@ export const createTodo = (todo: Todo) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(todo)
     };
-    fetch('http://localhost:9000/api/todo', requestOptions)
+    fetch(url, requestOptions)
         .then(response => response.json());
 }
 
@@ -26,6 +26,6 @@ export const updateTodo = (todo: Todo) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(todo)
     };
-    fetch('http://localhost:9000/api/todo', requestOptions)
+    fetch(url, requestOptions)
         .then(response => response.json());
 }
