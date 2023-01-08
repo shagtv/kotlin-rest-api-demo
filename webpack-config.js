@@ -6,7 +6,8 @@ module.exports = {
     mode: "production",
     output: {
         path: path.resolve(__dirname, "./src/main/resources/static/js/"),
-        filename: "./app-bundle.js"
+        filename: "[name].js",
+        chunkFilename: '[id].[chunkhash].js'
     },
     resolve: {
         extensions: ['.Webpack.js', '.web.js', '.ts', '.js', '.jsx', '.tsx', '.css']
@@ -32,6 +33,7 @@ module.exports = {
     },
     optimization: {
         minimize: true,
+        runtimeChunk: true,
         minimizer: [new TerserPlugin({
             parallel: true,
             terserOptions: {
