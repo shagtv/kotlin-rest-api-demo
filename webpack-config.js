@@ -1,9 +1,9 @@
 const path = require('path');
-
+const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
-    devtool: 'source-map',
+    // devtool: 'source-map',
     entry: "./src/main/resources/static/tsx/index.tsx",
-    mode: "development",
+    mode: "production",
     output: {
         path: path.resolve(__dirname, "./src/main/resources/static/js/"),
         filename: "./app-bundle.js"
@@ -29,5 +29,18 @@ module.exports = {
                 ]
             },
         ]
-    }
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin({
+            parallel: true,
+            terserOptions: {
+                compress: true,
+                format: {
+                    comments: false,
+                },
+            },
+            extractComments: false,
+        })],
+    },
 }

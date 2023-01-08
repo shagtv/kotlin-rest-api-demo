@@ -1,7 +1,6 @@
-import * as React from "react";
 import "../css/App.css"
 import InputField from "./components/InputField";
-import {useEffect, useState} from "react";
+import * as React from "react";
 import {Todo} from "./model";
 import TodoList from "./components/TodoList";
 import * as Api from "./api";
@@ -9,11 +8,11 @@ import {DragDropContext, DropResult} from "react-beautiful-dnd";
 
 const App: React.FC = () => {
 
-    const [todo, setTodo] = useState<string>("");
-    const [todos, setTodos] = useState<Todo[]>([]);
-    const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
+    const [todo, setTodo] = React.useState<string>("");
+    const [todos, setTodos] = React.useState<Todo[]>([]);
+    const [completedTodos, setCompletedTodos] = React.useState<Todo[]>([]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         fetch(Api.url,)
             .then(resp => resp.json())
             .then(actualData => {

@@ -1,9 +1,8 @@
-import * as React from "react";
 import "./styles.css"
 import {Todo} from "../model";
 import {AiFillEdit, AiFillDelete} from "react-icons/ai"
 import {MdDone} from "react-icons/md"
-import {useEffect, useRef, useState} from "react";
+import * as React from "react";
 import * as Api from "../api";
 import {Draggable} from "react-beautiful-dnd";
 
@@ -15,8 +14,8 @@ interface Props {
 }
 
 const SingleTodo: React.FC<Props> = ({index, todo, todos, setTodos}) => {
-    const [edit, setEdit] = useState<boolean>(false);
-    const [editTodo, setEditTodo] = useState<string>(todo.todo);
+    const [edit, setEdit] = React.useState<boolean>(false);
+    const [editTodo, setEditTodo] = React.useState<string>(todo.todo);
 
     const handleDone = (id: number) => {
         setTodos(
@@ -51,9 +50,9 @@ const SingleTodo: React.FC<Props> = ({index, todo, todos, setTodos}) => {
         setEdit(false);
     }
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         inputRef.current?.focus();
     }, [edit])
 

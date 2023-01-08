@@ -1,8 +1,8 @@
-import * as React from "react";
 import "./styles.css"
 import {Todo} from "../model";
 import SingleTodo from "./SingleTodo";
 import {Droppable} from "react-beautiful-dnd";
+import * as React from "react";
 
 interface Props {
     todos: Todo[],

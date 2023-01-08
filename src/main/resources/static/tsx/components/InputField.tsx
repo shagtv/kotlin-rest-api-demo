@@ -1,6 +1,5 @@
-import * as React from "react";
 import "./styles.css"
-import {useRef} from "react";
+import * as React from "react";
 
 interface Props {
     todo: string,
@@ -9,7 +8,7 @@ interface Props {
 }
 
 const InputField: React.FC<Props> = ({todo, setTodo, handleAdd}) => {
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
     return (
         <form className="input" onSubmit={(e) => {

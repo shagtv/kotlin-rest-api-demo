@@ -1,6 +1,4 @@
 import {Todo} from "./model";
-import {useEffect, useState} from "react";
-
 
 export const url = "http://localhost:9000/api/todo";
 
