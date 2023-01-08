@@ -44,7 +44,7 @@ const App: React.FC = () => {
         )
             return;
 
-        let add,
+        let add: Todo,
             active = todos,
             complete = completedTodos;
         if (source.droppableId === "TodosList") {
@@ -55,10 +55,13 @@ const App: React.FC = () => {
             complete.splice(source.index, 1);
         }
         if (destination.droppableId === "TodosList") {
+            add.isDone = false;
             active.splice(destination.index, 0, add);
         } else if (destination.droppableId === "TodosRemove") {
+            add.isDone = true;
             complete.splice(destination.index, 0, add);
         }
+        Api.updateTodo(add)
         setTodos(active);
         setCompletedTodos(complete);
     }
